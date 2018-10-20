@@ -31,18 +31,34 @@ public class Held {
 		w2 = new Wuerfel(6);
 	}
 
-	public boolean setztAus() {
+	/**Der Held muss aussetzen
+	 * @param i die Anzahl der Runden
+	 */
+	public void mussAussetzen(int i) {
+		// setze wieviele runden ausgesetzt werden muss
+		aussetzZaehler=i;
+		
+	}
+
+	/**Gibt an, ob der Held aussetzen muss
+	 * @return true wenn er aussetzen muss
+	 */
+	public boolean mussAussetzen() {
+		return (aussetzZaehler > 0 );
+	}
+
+	/**Der Held setzt einmal aus 
+	 * 
+	 */
+	public void setztAus() {
 		// der Held setzt einmal aus
-		boolean pausiert = false;
 		if (aussetzZaehler > 0) {
 			aussetzZaehler--;
-			pausiert = true;
 		}
-		return pausiert;
 	}
 
 	/** Der Held macht den Angriffswurf mit 2 6er Würfel 
-	 * @return die gesamtzahl der Würfel-Punkte
+	 * @return die Gesamtzahl der Würfel-Punkte
 	 */
 	public int greiftAn() {
 		// mit 2 Würfeln wurfeln
@@ -62,7 +78,6 @@ public class Held {
 	 */
 	public void stirbt() {
 		isAlive=false;
-		
 	}
 
 	/** bekomme den Namen
@@ -72,16 +87,11 @@ public class Held {
 		return name;
 	}
 
-	/**Der Held muss aussetzen
-	 * @param i die Anzahl der Runden
+
+
+	/**wieviel Vermögen hat der Held schon ?
+	 * @return die Summe der GoldStücke der Schätze die er besitzt
 	 */
-	public void mussAussetzen(int i) {
-		// setze wieviele runden ausgesetzt werden muss
-		aussetzZaehler=i;
-		
-	}
-
-
 	public int getVermögen() {
 		// gibt das Vermögen zurück
 		int vermoegen = 0;
@@ -91,18 +101,27 @@ public class Held {
 		return vermoegen;
 	}
 
+	/**Der Held verliert alle Schätze
+	 * @return die Liste der Schätze die er besaß
+	 */
 	public List<Schatz> verliertAlles() {
 		List<Schatz> verlust = schaetze;
 		schaetze = new LinkedList<Schatz>();
 		return verlust;
 	}
 
-	public void addAll(List<Schatz> schaetze2) {
+	/**Fügt eine Liste von Schätzen zu den Schätzen des Heldes hinzu
+	 * @param schaetzeListe die Liste der neuen Schätze die hinzugefügt werden sollen
+	 */
+	public void addAll(List<Schatz> schaetzeListe) {
 		// fügt alle Schaetze dem Vermögen des Helden hinzu
-		this.schaetze.addAll(schaetze2);
+		this.schaetze.addAll(schaetzeListe);
 		
 	}
 
+	/**Der Held verliert eine Schatz und screibt auf Console, was er verliert
+	 * @return den Schatz den er verliert
+	 */
 	public Schatz removeSchatz() {
 		// gib einen Schatz an das Monster
 		Schatz schatz = null; 
@@ -149,7 +168,7 @@ public class Held {
 			} else {
 				// verlust des 1. Schatzes
 				Schatz verlust = schaetze.remove(0);
-				System.out.println("Der Held verliert eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
+				System.out.println("Der Held verliert eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken an das Monster (" + monster.getSiegespunkte() +  ")");
 				monster.add(verlust);
 			}
 			break;
@@ -163,14 +182,14 @@ public class Held {
 			} else {
 				// verlust des 1. Schatzes
 				Schatz verlust = schaetze.remove(0);
-				System.out.println("Der Held verliert eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
+				System.out.println("Der Held verliert eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken an das Monster (" + monster.getSiegespunkte() +  ")");
 				monster.add(verlust);
 				if (!hatVermoegen()) {
 					System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
 				} else {
 					// verlust des 1. Schatzes
 					verlust = schaetze.remove(0);
-					System.out.println("Der Held verliert noch eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
+					System.out.println("Der Held verliert noch eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken an das Monster (" + monster.getSiegespunkte() +  ")");
 					monster.add(verlust);
 				}
 
@@ -180,14 +199,14 @@ public class Held {
 		case 3:
 		case 12:
 			int wert = getVermögen();
-			monster.add(schaetze);
+			monster.addAll(schaetze);
 			schaetze = new LinkedList<Schatz>();
 			System.out.println("Der Held verliert alle Schatzkarten im Wert von " + wert + " Goldstücken");
 			break;
 
 		default:
 			// der Held ist tot
-			System.out.println("Leider har der Held den Kampf mit dem Monster verlohren und ist nun tot!"); 
+			System.out.println("Leider hat der Held den Kampf mit dem Monster verlohren und ist nun tot!"); 
 			this.stirbt();
 			break;
 		}
