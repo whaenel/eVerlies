@@ -37,25 +37,38 @@ public class Held {
 		return w1.wuerfeln() + w2.wuerfeln()      ;
 	}
 
+	/** Prüft ob der Held noch lebt
+	 * @return true wenn der Held noch lebt.
+	 */
 	public boolean isAlive() {
 		// lebt der Held noch
 		return isAlive;
 	}
+	
+	/**Lass den Helden sterben
+	 * 
+	 */
+	public void stirbt() {
+		isAlive=false;
+		
+	}
 
+	/** bekomme den Namen
+	 * @return Name des Heldes
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**Der Held muss aussetzen
+	 * @param i die Anzahl der Runden
+	 */
 	public void mussAussetzen(int i) {
 		// setze wieviele runden ausgesetzt werden muss
 		aussetzZaehler=i;
 		
 	}
 
-	public void stirbt() {
-		isAlive=false;
-		
-	}
 
 	public int getVermögen() {
 		// gibt das Vermögen zurück
