@@ -88,6 +88,7 @@ public class Held {
 	}
 
 <<<<<<< Upstream, based on origin/Walter
+<<<<<<< Upstream, based on origin/Walter
 	public boolean hatVermoegen() {
 		// hat der Held Schätze
 		return (schaetze.size() > 0);
@@ -146,6 +147,9 @@ public class Held {
 		}
 		
 =======
+=======
+<<<<<<< Upstream, based on origin/master
+>>>>>>> 12e788c Alle Rückzugs-aktionen und alle Schätze des Monsters
 	public boolean hatVermögen() {
 		// TODO Auto-generated method stub
 		return false;
@@ -154,6 +158,14 @@ public class Held {
 
 	public void ziehtSichZurueck(Monster monster, List<Schatz> vermögen) {
 		// TODO Auto-generated method stub
+=======
+	public boolean hatVermoegen() {
+		// hat der Held Schätze
+		return (schaetze.size() > 0);
+	}
+	public void ziehtSichZurueck(Monster monster) {
+		// mache den Rettungswurf
+>>>>>>> 37ae62c Alle Rückzugs-aktionen und alle Schätze des Monsters
 		int rettungsWurf = w1.wuerfeln() + w2.wuerfeln();
 		switch (rettungsWurf) {
 		case 7:
@@ -164,11 +176,11 @@ public class Held {
 		case 6:
 		case 8:
 			// verlust einer Schatzkarte 
-			if (vermögen.isEmpty()) {
+			if (!hatVermoegen()) {
 				System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
 			} else {
 				// verlust des 1. Schatzes
-				Schatz verlust = vermögen.remove(0);
+				Schatz verlust = schaetze.remove(0);
 				System.out.println("Der Held verliert eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
 				monster.add(verlust);
 			}
@@ -178,18 +190,18 @@ public class Held {
 		case 9:
 		case 10:
 			// verlust von 2 schatzkarten, ein mal aussetzen 
-			if (vermögen.isEmpty()) {
+			if (!hatVermoegen()) {
 				System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
 			} else {
 				// verlust des 1. Schatzes
-				Schatz verlust = vermögen.remove(0);
+				Schatz verlust = schaetze.remove(0);
 				System.out.println("Der Held verliert eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
 				monster.add(verlust);
-				if (vermögen.isEmpty()) {
+				if (!hatVermoegen()) {
 					System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
 				} else {
 					// verlust des 1. Schatzes
-					verlust = vermögen.remove(0);
+					verlust = schaetze.remove(0);
 					System.out.println("Der Held verliert noch eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
 					monster.add(verlust);
 				}

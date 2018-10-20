@@ -37,10 +37,6 @@ public class GameRunner {
 					monster.add(schatz);
 
 				} else {
-<<<<<<< Upstream, based on origin/Walter
-					System.out.println("Held "+ held.getName() +" schlägt daneben und das Monster ("+monster.getSiegespunkte()+") schlägt zurück!");
-					held.ziehtSichZurueck(monster);
-=======
 					System.out.println("Held "+ held.getName() +" schlägt daneben!");
 					int rettungsWurf = wuerfel6.wuerfeln() + wuerfel6.wuerfeln();
 					switch (rettungsWurf) {
