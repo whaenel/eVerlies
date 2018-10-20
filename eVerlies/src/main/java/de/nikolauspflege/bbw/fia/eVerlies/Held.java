@@ -212,7 +212,7 @@ public class Held {
 
 		default:
 			// der Held ist tot
-			System.out.println("Leider har der Held den Kampf mit dem Monster verlohren und ist nun tot!");
+			System.out.println("Leider har der Held den Kampf mit dem Monster verlohren und ist nun tot!"); 
 			this.stirbt();
 			break;
 		}
