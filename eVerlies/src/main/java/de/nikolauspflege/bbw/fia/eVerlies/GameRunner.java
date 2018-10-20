@@ -11,23 +11,30 @@ public class GameRunner {
 		Held held = new Held("Pantoffel");
 		Monster monster = new Monster(1);
 		Schatz schatz = new Schatz(1);
+		monster.add(schatz);
 		Wuerfel wuerfel6 = new Wuerfel(6);
 		int level = 1;
-		List <Schatz> vermögen = new ArrayList<Schatz>();
 		
 		
-		while (held.isAlive()) {
+		while ((held.isAlive() ) && (level <= 10)) {
 			// auf in die nächste Runde 
 			System.out.println("Level: "+level);
 			if (!held.setztAus()) {
 				int angriffspunkte = held.greiftAn();
 				System.out.println("held greift mit " + angriffspunkte +" Punkten an");
 				if (angriffspunkte >= monster.getSiegespunkte()) {
-					System.out.println("Held "+ held.getName() +" erschlägt das Monster ("+monster.getSiegespunkte()+") und bekommt den Schatz im Wert von " + schatz.getValue() + " Goldstücken" );
-					vermögen.add(schatz);
-					level++;
+					List<Schatz> schaetze = monster.getSchaetze();
+					int wert =monster.getVermögen();
+					if (schaetze.size() > 1) {
+						System.out.println("Held "+ held.getName() +" erschlägt das Monster ("+monster.getSiegespunkte()+") und bekommt die Schätze im Wert von " + wert + " Goldstücken" );						
+					} else {
+						System.out.println("Held "+ held.getName() +" erschlägt das Monster ("+monster.getSiegespunkte()+") und bekommt den Schatz im Wert von " + wert + " Goldstücken" );						
+					}
+					held.addAll(schaetze);
+					// erstelle ein neues monster mit schatz
 					monster = new Monster(level);
 					schatz = new Schatz(level);
+					monster.add(schatz);
 
 				} else {
 					System.out.println("Held "+ held.getName() +" schlägt daneben!");
@@ -41,38 +48,23 @@ public class GameRunner {
 					case 6:
 					case 8:
 						// verlust einer Schatzkarte 
-						if (vermögen.isEmpty()) {
-							System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
-						} else {
-							// verlust des 1. Schatzes
-							Schatz verlust = vermögen.remove(0);
-							System.out.println("Der Held verliert eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
-							monster.add(verlust);
-						}
+						monster.add(held.removeSchatz());
 						break;
 					case 4:
 					case 5:
 					case 9:
 					case 10:
 						// verlust von 2 schatzkarten, ein mal aussetzen 
-						if (vermögen.isEmpty()) {
-							System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
-						} else {
-							// verlust des 1. Schatzes
-							Schatz verlust = vermögen.remove(0);
-							System.out.println("Der Held verliert eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
-							monster.add(verlust);
-							if (vermögen.isEmpty()) {
-								System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
-							} else {
-								// verlust des 1. Schatzes
-								verlust = vermögen.remove(0);
-								System.out.println("Der Held verliert noch eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
-								monster.add(verlust);
-							}
-
-						}
+						monster.add(held.removeSchatz());
+						monster.add(held.removeSchatz());
 						held.mussAussetzen(1);
+						break;
+					case 3:
+					case 12:
+						System.out.println("Der Held verliert alle Schätze im Wert von " + held.getVermögen() + " Goldstücken");
+						List <Schatz> schaetze = held.verliertAlles();
+						monster.add(schaetze);
+
 						break;
 
 					default:
@@ -84,17 +76,14 @@ public class GameRunner {
 				}
 			
 			} else {
-				level++;
-				monster = new Monster(level);
-				schatz = new Schatz(level);	
+				//monster = new Monster(level);
+				//schatz = new Schatz(level);	
 				System.out.println("Der Held setzt eine Runde aus!");
 			}
+			level ++ ;
 			
 		}
-		int goldstuecke =0;
-		for (Schatz schatz2 : vermögen) {
-			goldstuecke += schatz2.getValue();
-		}
+		int goldstuecke = held.getVermögen();
 		System.out.println("Der Held "+ held.getName() + " hinterläßt der Nachwelt " +goldstuecke + " Goldstücke");
 
 	}

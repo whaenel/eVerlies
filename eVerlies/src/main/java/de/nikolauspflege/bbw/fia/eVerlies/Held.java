@@ -1,5 +1,8 @@
 package de.nikolauspflege.bbw.fia.eVerlies;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Held {
 
 	private int aussetzZaehler;
@@ -7,6 +10,7 @@ public class Held {
 	private Wuerfel w1;
 	private Wuerfel w2;
 	private boolean isAlive=true;
+	private List<Schatz> schaetze = new LinkedList<Schatz>();
 
 	public Held(String string) {
 		// setze den Namen
@@ -31,7 +35,7 @@ public class Held {
 	}
 
 	public boolean isAlive() {
-		// TODO Auto-generated method stub
+		// lebt der Held noch
 		return isAlive;
 	}
 
@@ -48,6 +52,44 @@ public class Held {
 	public void stirbt() {
 		isAlive=false;
 		
+	}
+
+	public int getVermögen() {
+		// gibt das Vermögen zurück
+		int vermoegen = 0;
+		for (Schatz schatz : schaetze) {
+			vermoegen += schatz.getValue();
+		}
+		return vermoegen;
+	}
+
+	List<Schatz> verliertAlles() {
+		List<Schatz> verlust = schaetze;
+		schaetze = new LinkedList<Schatz>();
+		return verlust;
+	}
+
+	public void addAll(List<Schatz> schaetze2) {
+		// fügt alle Schaetze dem Vermögen des Helden hinzu
+		this.schaetze.addAll(schaetze2);
+		
+	}
+
+	public Schatz removeSchatz() {
+		// gib einen Schatz an das Monster
+		Schatz schatz = null; 
+		if (schaetze.size() > 0 ) {
+			schatz = schaetze.remove(0);
+			System.out.println("Der Held verliert eine Schatzkarte im Wert von " + schatz.getValue() + " Goldstücken");
+		} else {
+			System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
+		}
+		return schatz;
+	}
+
+	public boolean hatVermögen() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
