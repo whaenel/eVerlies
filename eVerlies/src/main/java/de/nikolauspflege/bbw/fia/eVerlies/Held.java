@@ -3,6 +3,15 @@ package de.nikolauspflege.bbw.fia.eVerlies;
 import java.util.LinkedList;
 import java.util.List;
 
+/**Die Klasse Held bekämpft die Monster. Dazu benötigt sie 2 Würfel um damit den Angriff zu starten.
+ * Wenn er das Monster besiegt kann er den Schatz des Monsters in seine Schatztruhe legen.
+ * Schlägt er daneben, muss er sich um seinen Rückzug kümmern. Dabei kann er einen, zwei oder gar alle Schätze an das Monster verlieren und
+ * muss möglicherweise aussetzen.
+ * Wenn er Pech hat stirbt er sogar.
+ * Natürlich hat unser Held auch einen Namen.
+ * @author walter
+ *
+ */
 public class Held {
 
 	private int aussetzZaehler;
@@ -13,11 +22,11 @@ public class Held {
 	private List<Schatz> schaetze = new LinkedList<Schatz>();
 
 	/** Erzeuge einen neuen Helden
-	 * @param string der Name des Helden
+	 * @param name des Name des Helden
 	 */
-	public Held(String string) {
+	public Held(String name) {
 		// setze den Namen
-		name = string;
+		this.name = name;
 		w1 = new Wuerfel(6);
 		w2 = new Wuerfel(6);
 	}
