@@ -63,7 +63,7 @@ public class Held {
 		return vermoegen;
 	}
 
-	List<Schatz> verliertAlles() {
+	public List<Schatz> verliertAlles() {
 		List<Schatz> verlust = schaetze;
 		schaetze = new LinkedList<Schatz>();
 		return verlust;
