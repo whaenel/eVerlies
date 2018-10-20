@@ -94,6 +94,16 @@ public class Held {
 		// hat der Held Schätze
 		return (schaetze.size() > 0);
 	}
+	
+	/**Rückzug nachdem er das Monster nicht erledigt hat
+	 * macht einen Rettungswurf mit 2 6er Würfel
+	 * 7,11 nichts passiert da das Monster daneben schlägt
+	 * 6,8  der Held verliert eine Schatzkarte an das Monster, wenn er eine hat
+	 * 4,5,9,10 der Held verliert 2 Schatzkarten an das Monster und muß eine Runde aussetzen
+	 * 3,12 Der Held verliert alle Schatzkarten an das Monster
+	 * 2 Der Held stirbt
+	 * @param monster
+	 */
 	public void ziehtSichZurueck(Monster monster) {
 		// mache den Rettungswurf
 		int rettungsWurf = w1.wuerfeln() + w2.wuerfeln();
@@ -138,6 +148,13 @@ public class Held {
 
 			}
 			this.mussAussetzen(1);
+			break;
+		case 3:
+		case 12:
+			int wert = getVermögen();
+			monster.add(schaetze);
+			schaetze = new LinkedList<Schatz>();
+			System.out.println("Der Held verliert alle Schatzkarten im Wert von " + wert + " Goldstücken");
 			break;
 
 		default:
