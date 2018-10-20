@@ -17,7 +17,7 @@ public class GameRunner {
 		
 		
 		while (held.isAlive()) {
-			// auf in die nächste Runde 
+			// auf in die nächste Runde  
 			System.out.println("Level: "+level);
 			if (!held.setztAus()) {
 				int angriffspunkte = held.greiftAn();
