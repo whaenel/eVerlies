@@ -13,7 +13,7 @@ public class Held {
 	public Held(String string) {
 		// setze den Namen
 		name = string;
-		w1 = new Wuerfel(6);
+		w1 = new Wuerfel(6); 
 		w2 = new Wuerfel(6);
 	}
 
