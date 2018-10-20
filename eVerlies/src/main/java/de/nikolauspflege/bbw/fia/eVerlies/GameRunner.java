@@ -81,6 +81,7 @@ public class GameRunner {
 				//schatz = new Schatz(level);	
 <<<<<<< Upstream, based on origin/Walter
 <<<<<<< Upstream, based on origin/Walter
+<<<<<<< Upstream, based on origin/Walter
 				System.out.println("Der Held setzt eine Runde aus!");  
 =======
 				System.out.println("Der Held setzt eine Runde aus!");
@@ -88,6 +89,9 @@ public class GameRunner {
 =======
 				System.out.println("Der Held setzt eine Runde aus!"); 
 >>>>>>> 6c2ff34 change after rebase to local master
+=======
+				System.out.println("Der Held setzt eine Runde aus!");  
+>>>>>>> 48ac20b commit after rebase to same branch origin
 			}
 			level ++ ;
 			
