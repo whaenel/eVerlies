@@ -80,10 +80,14 @@ public class GameRunner {
 				//monster = new Monster(level);
 				//schatz = new Schatz(level);	
 <<<<<<< Upstream, based on origin/Walter
+<<<<<<< Upstream, based on origin/Walter
 				System.out.println("Der Held setzt eine Runde aus!");  
 =======
 				System.out.println("Der Held setzt eine Runde aus!");
 >>>>>>> a5ca8ce Alle Rückzugs-aktionen und alle Schätze des Monsters
+=======
+				System.out.println("Der Held setzt eine Runde aus!"); 
+>>>>>>> 6c2ff34 change after rebase to local master
 			}
 			level ++ ;
 			
