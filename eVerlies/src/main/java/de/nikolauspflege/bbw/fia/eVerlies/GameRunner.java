@@ -18,19 +18,8 @@ public class GameRunner {
 		
 <<<<<<< Upstream, based on origin/Walter
 		while (held.isAlive()) {
-=======
-<<<<<<< Upstream, based on origin/master
 		while ((held.isAlive() ) && (level <= 10)) {
-<<<<<<< Upstream, based on origin/master
->>>>>>> dbcf1f4 dummy Änderung
-			// auf in die nächste Runde  
-=======
 			// auf in die nächste Runde 
-=======
-		while (held.isAlive()) {
-			// auf in die nächste Runde  
->>>>>>> d604811 dummy Änderung
->>>>>>> 3cbb3b3 dummy Änderung
 			System.out.println("Level: "+level);
 			if (!held.setztAus()) {
 				int angriffspunkte = held.greiftAn();
@@ -86,25 +75,12 @@ public class GameRunner {
 						held.stirbt();
 						break;
 					}
->>>>>>> a5ca8ce Alle Rückzugs-aktionen und alle Schätze des Monsters
 				}
 			
 			} else {
 				//monster = new Monster(level);
 				//schatz = new Schatz(level);	
-<<<<<<< Upstream, based on origin/Walter
-<<<<<<< Upstream, based on origin/Walter
-<<<<<<< Upstream, based on origin/Walter
 				System.out.println("Der Held setzt eine Runde aus!");  
-=======
-				System.out.println("Der Held setzt eine Runde aus!");
->>>>>>> a5ca8ce Alle Rückzugs-aktionen und alle Schätze des Monsters
-=======
-				System.out.println("Der Held setzt eine Runde aus!"); 
->>>>>>> 6c2ff34 change after rebase to local master
-=======
-				System.out.println("Der Held setzt eine Runde aus!");  
->>>>>>> 48ac20b commit after rebase to same branch origin
 			}
 			level ++ ;
 			
