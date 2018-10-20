@@ -12,6 +12,9 @@ public class Held {
 	private boolean isAlive=true;
 	private List<Schatz> schaetze = new LinkedList<Schatz>();
 
+	/** Erzeuge einen neuen Helden
+	 * @param string der Name des Helden
+	 */
 	public Held(String string) {
 		// setze den Namen
 		name = string;
