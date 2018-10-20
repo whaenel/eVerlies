@@ -29,6 +29,9 @@ public class Held {
 		return pausiert;
 	}
 
+	/** Der Held macht den Angriffswurf mit 2 6er Würfel 
+	 * @return die gesamtzahl der Würfel-Punkte
+	 */
 	public int greiftAn() {
 		// mit 2 Würfeln wurfeln
 		return w1.wuerfeln() + w2.wuerfeln()      ;
