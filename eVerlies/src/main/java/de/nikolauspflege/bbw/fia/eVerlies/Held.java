@@ -87,7 +87,6 @@ public class Held {
 		return schatz;
 	}
 
-
 	/**Prüft ob ein Held Schätze besitzt
 	 * @return true wenn er Schätze hat
 	 */
