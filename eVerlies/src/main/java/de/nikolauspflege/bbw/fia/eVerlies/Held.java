@@ -1,5 +1,6 @@
 package de.nikolauspflege.bbw.fia.eVerlies;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Held {
@@ -9,6 +10,7 @@ public class Held {
 	private Wuerfel w1;
 	private Wuerfel w2;
 	private boolean isAlive=true;
+	private List<Schatz> schaetze = new LinkedList<Schatz>();
 
 	public Held(String string) {
 		// setze den Namen
@@ -33,7 +35,7 @@ public class Held {
 	}
 
 	public boolean isAlive() {
-		// TODO Auto-generated method stub
+		// lebt der Held noch
 		return isAlive;
 	}
 
@@ -52,8 +54,45 @@ public class Held {
 		
 	}
 
-	public void ziehtSichZurueck(Monster monster, List<Schatz> vermögen) {
-		// TODO Auto-generated method stub
+	public int getVermögen() {
+		// gibt das Vermögen zurück
+		int vermoegen = 0;
+		for (Schatz schatz : schaetze) {
+			vermoegen += schatz.getValue();
+		}
+		return vermoegen;
+	}
+
+	List<Schatz> verliertAlles() {
+		List<Schatz> verlust = schaetze;
+		schaetze = new LinkedList<Schatz>();
+		return verlust;
+	}
+
+	public void addAll(List<Schatz> schaetze2) {
+		// fügt alle Schaetze dem Vermögen des Helden hinzu
+		this.schaetze.addAll(schaetze2);
+		
+	}
+
+	public Schatz removeSchatz() {
+		// gib einen Schatz an das Monster
+		Schatz schatz = null; 
+		if (schaetze.size() > 0 ) {
+			schatz = schaetze.remove(0);
+			System.out.println("Der Held verliert eine Schatzkarte im Wert von " + schatz.getValue() + " Goldstücken");
+		} else {
+			System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
+		}
+		return schatz;
+	}
+
+	public boolean hatVermoegen() {
+		// hat der Held Schätze
+		return (schaetze.size() > 0);
+	}
+	public void ziehtSichZurueck(Monster monster) {
+		// mache den Rettungswurf
 		int rettungsWurf = w1.wuerfeln() + w2.wuerfeln();
 		switch (rettungsWurf) {
 		case 7:
@@ -64,11 +103,11 @@ public class Held {
 		case 6:
 		case 8:
 			// verlust einer Schatzkarte 
-			if (vermögen.isEmpty()) {
+			if (!hatVermoegen()) {
 				System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
 			} else {
 				// verlust des 1. Schatzes
-				Schatz verlust = vermögen.remove(0);
+				Schatz verlust = schaetze.remove(0);
 				System.out.println("Der Held verliert eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
 				monster.add(verlust);
 			}
@@ -78,18 +117,18 @@ public class Held {
 		case 9:
 		case 10:
 			// verlust von 2 schatzkarten, ein mal aussetzen 
-			if (vermögen.isEmpty()) {
+			if (!hatVermoegen()) {
 				System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
 			} else {
 				// verlust des 1. Schatzes
-				Schatz verlust = vermögen.remove(0);
+				Schatz verlust = schaetze.remove(0);
 				System.out.println("Der Held verliert eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
 				monster.add(verlust);
-				if (vermögen.isEmpty()) {
+				if (!hatVermoegen()) {
 					System.out.println("Der Held hat noch keine Schätze und kann daher auch nichts verlieren! Glück gehabt!");
 				} else {
 					// verlust des 1. Schatzes
-					verlust = vermögen.remove(0);
+					verlust = schaetze.remove(0);
 					System.out.println("Der Held verliert noch eine Schatzkarte im Wert von " + verlust.getValue() + " Goldstücken");
 					monster.add(verlust);
 				}
