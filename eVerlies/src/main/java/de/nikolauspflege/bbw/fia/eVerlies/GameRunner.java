@@ -16,15 +16,8 @@ public class GameRunner {
 		int level = 1;
 		
 		
-<<<<<<< Upstream, based on origin/Walter
-<<<<<<< Upstream, based on origin/Walter
-		while (held.isAlive()) {
 		while ((held.isAlive() ) && (level <= 10)) {
 			// auf in die nächste Runde 
-=======
-		while ((held.isAlive() ) && (level <= 10)) {
-			// auf in die nächste Runde  
->>>>>>> 304856c dummy Änderung
 			System.out.println("Level: "+level);
 			if (!held.setztAus()) {
 				int angriffspunkte = held.greiftAn();
