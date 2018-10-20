@@ -87,7 +87,9 @@ public class Held {
 		return schatz;
 	}
 
-
+	/**Prüft ob ein Held Schätze besitzt
+	 * @return true wenn er Schätze hat
+	 */
 	public boolean hatVermoegen() {
 		// hat der Held Schätze
 		return (schaetze.size() > 0);
@@ -146,5 +148,4 @@ public class Held {
 		}
 		
 	}
-
 }
