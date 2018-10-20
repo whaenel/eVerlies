@@ -78,7 +78,7 @@ public class GameRunner {
 			} else {
 				//monster = new Monster(level);
 				//schatz = new Schatz(level);	
-				System.out.println("Der Held setzt eine Runde aus!");  
+				System.out.println("Der Held setzt eine Runde aus!");
 			}
 			level ++ ;
 			
