@@ -87,6 +87,7 @@ public class Held {
 		return schatz;
 	}
 
+<<<<<<< Upstream, based on origin/Walter
 	public boolean hatVermoegen() {
 		// hat der Held Schätze
 		return (schaetze.size() > 0);
@@ -144,6 +145,11 @@ public class Held {
 			break;
 		}
 		
+=======
+	public boolean hatVermögen() {
+		// TODO Auto-generated method stub
+		return false;
+>>>>>>> a5ca8ce Alle Rückzugs-aktionen und alle Schätze des Monsters
 	}
 
 }

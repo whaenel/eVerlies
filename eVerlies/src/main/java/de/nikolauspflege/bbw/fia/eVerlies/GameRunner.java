@@ -37,14 +37,57 @@ public class GameRunner {
 					monster.add(schatz);
 
 				} else {
+<<<<<<< Upstream, based on origin/Walter
 					System.out.println("Held "+ held.getName() +" schlägt daneben und das Monster ("+monster.getSiegespunkte()+") schlägt zurück!");
 					held.ziehtSichZurueck(monster);
+=======
+					System.out.println("Held "+ held.getName() +" schlägt daneben!");
+					int rettungsWurf = wuerfel6.wuerfeln() + wuerfel6.wuerfeln();
+					switch (rettungsWurf) {
+					case 7:
+					case 11:
+						// nichts passiert 
+						System.out.println("Der Held hat Glück, denn das Monster schlägt daneben");
+						break;
+					case 6:
+					case 8:
+						// verlust einer Schatzkarte 
+						monster.add(held.removeSchatz());
+						break;
+					case 4:
+					case 5:
+					case 9:
+					case 10:
+						// verlust von 2 schatzkarten, ein mal aussetzen 
+						monster.add(held.removeSchatz());
+						monster.add(held.removeSchatz());
+						held.mussAussetzen(1);
+						break;
+					case 3:
+					case 12:
+						System.out.println("Der Held verliert alle Schätze im Wert von " + held.getVermögen() + " Goldstücken");
+						List <Schatz> schaetze = held.verliertAlles();
+						monster.add(schaetze);
+
+						break;
+
+					default:
+						// der Held ist tot
+						System.out.println("Leider har der Held den Kampf mit dem Monster verlohren und ist nun tot!");
+						held.stirbt();
+						break;
+					}
+>>>>>>> a5ca8ce Alle Rückzugs-aktionen und alle Schätze des Monsters
 				}
 			
 			} else {
 				//monster = new Monster(level);
 				//schatz = new Schatz(level);	
+<<<<<<< Upstream, based on origin/Walter
 				System.out.println("Der Held setzt eine Runde aus!");  
+=======
+				System.out.println("Der Held setzt eine Runde aus!");
+>>>>>>> a5ca8ce Alle Rückzugs-aktionen und alle Schätze des Monsters
 			}
 			level ++ ;
 			
