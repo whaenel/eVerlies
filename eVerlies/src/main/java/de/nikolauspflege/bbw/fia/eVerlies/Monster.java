@@ -1,9 +1,9 @@
 package de.nikolauspflege.bbw.fia.eVerlies;
 
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+
+import de.nikolauspflege.bbw.fia.eVerlies.AngriffsErgebnis.Ergebnis;
 
 /**Ein Monster ist der Gegner des Helden im Spiel. Wenn der Held mit einer Zahl >= den Siegespunkten des Monsters
  * angreift, gewinnt der Held. Damit bekommt er den Schatz des Monsters. Damit das MOnster auch einen Schatz in seiner Schatzkiste hat,
@@ -11,11 +11,9 @@ import java.util.Random;
  * @author walter
  *
  */
-public class Monster {
+public class Monster extends Schatzbesitzer {
 
 	private int siegespunkte;
-	private List <Schatz> schaetze = new LinkedList<Schatz>();
-
 	/**Erzeugt ein neues Monster für den level i.
 	 * Je höher der level, desto wahrscheinlicher liegen die Siegespunkte bei 12
 	 * @param level der Level im Spiel
@@ -31,63 +29,52 @@ public class Monster {
 				siegespunkte = 12;
 			}
 		}
+		name="Monster";
 
 	}
 
 	/**Gib die Würfelpunkte zurück, die nötig sind, um das Monster zu besiegen
 	 * @return die Anzahl der Punkte
 	 */
+	@Override
 	public int getSiegespunkte() {
 		return siegespunkte;
 	}
 
-	/**Fügt eien Schatz zu den Schätzen des Monsters hinzu
-	 * @param schatz
-	 */
-	public void add(Schatz schatz) {
-		// addiere den Schatz zum Vermögen des Monsters
-		if (schatz != null) {
-			schaetze.add(schatz);
-		}
+	@Override
+	public AngriffsErgebnis wirdAngegriffen(Schatzbesitzer held) {
+		AngriffsErgebnis result= new AngriffsErgebnis();
+		int angriffspunkte = held.greiftAn();
+		if (angriffspunkte >= getSiegespunkte()) {
+			// und bekommt den Schatz oder die Schätze des Monsters
+			int wert = getVermögen();
+			List<Schatz> schaetze = verliertAlles();
+			result.setErgebnis(Ergebnis.TOT);
+			result.setGoldStücke(wert);
+			result.setVerlohreneSchaetze(schaetze.size());
+//
+//			if (schaetze.size() > 1) {
+//				System.out.println(
+//						"Held " + held.getName() + " erschlägt das Monster (" + monster.getSiegespunkte()
+//								+ ") und bekommt die Schätze im Wert von " + wert + " Goldstücken");
+//			} else {
+//				System.out.println(
+//						"Held " + held.getName() + " erschlägt das Monster (" + monster.getSiegespunkte()
+//								+ ") und bekommt den Schatz im Wert von " + wert + " Goldstücken");
+//			}
+			held.addAll(schaetze);
+		} 
+		return result;
 	}
 
-	/**Fügt eine Liste von Schätzen zu den Schätzen des Monsters hinzu
-	 * @param schaetzeListe die Liste der neuen Schätze die hinzugefügt werden sollen
-	 */
-	public void addAll(List<Schatz> schaetzeListe) {
-		// fügt alle Schaetze dem Vermögen des Helden hinzu
-		this.schaetze.addAll(schaetzeListe);
-		
+	@Override
+	public int greiftAn() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-
-
-	/**Das Monster verliert alle Schätze
-	 * @return die Liste der Schätze die er besaß
-	 */
-	public List<Schatz> verliertAlles() {
-		List<Schatz> verlust = schaetze;
-		schaetze = new LinkedList<Schatz>();
-		return verlust;
-	}
-
-	/**Prüft ob ein Monster Schätze besitzt
-	 * @return true wenn er Schätze hat
-	 */
-	public boolean hatVermoegen() {
-		// hat der Held Schätze
-		return (schaetze.size() > 0);
-	}
-
-	/**wieviel Vermögen hat das Monster schon ?
-	 * @return die Summe der GoldStücke der Schätze die es besitzt
-	 */
-	public int getVermögen() {
-		// gibt das Vermögen zurück
-		int vermoegen = 0;
-		for (Schatz schatz : schaetze) {
-			vermoegen += schatz.getValue();
-		}
-		return vermoegen;
+	@Override
+	public String toString() {
+		return name+"("+ siegespunkte +")";
 	}
 
 }

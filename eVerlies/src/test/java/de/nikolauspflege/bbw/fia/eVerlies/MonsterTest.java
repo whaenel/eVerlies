@@ -59,7 +59,7 @@ class MonsterTest {
 
 	@Test
 	void testGetVermögen() {
-		Monster mon = new Monster(10);
+		Schatzbesitzer mon = new Monster(10);
 		
 		assertEquals(0,mon.getVermögen(),"mon hat am anfang kein Geld");
 		assertFalse(mon.hatVermoegen(), "mon hat am anfang kein Geld");
