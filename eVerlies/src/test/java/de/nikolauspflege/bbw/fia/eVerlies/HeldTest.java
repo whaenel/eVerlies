@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class HeldTest {
 
-	Held held = new Held("Waschlappen");
+	Abenteurer held = new Held("Waschlappen");
 	@BeforeEach
 	void setUp() throws Exception {
 	}
@@ -110,7 +110,7 @@ class HeldTest {
 		while ((i< 1000 )&&  ( held.isAlive())) {
 			monster = new Monster(i);
 			monster.add(new Schatz(i));
-			held.ziehtSichZurueck(monster);
+			held.wirdAngegriffen(monster);
 			ueberlebteEinmal |= held.isAlive();
 		}
 		assertTrue(ueberlebteEinmal, "Held sollte es mindestens einmal überleben");
